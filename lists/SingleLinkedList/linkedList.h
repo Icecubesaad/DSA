@@ -11,6 +11,7 @@ public:
 	void insert_at_tail(int);
 	void delete_from_head();
 	void delete_from_tail();
+	void delete_from_particular_position(int);
 	void display();
 };
 LinkedList::LinkedList() {
@@ -69,5 +70,49 @@ void LinkedList::display() {
 	{
 		cout << temp->data << "\t";
 		temp = temp->next;
+	}
+}
+void LinkedList::delete_from_head() {
+	Node* temp = new Node(); // node to delete
+	temp = head;
+	head = head->next;
+	delete temp;
+}
+void LinkedList::delete_from_tail() {
+	Node* temp = new Node(); // node to delete
+	Node* pre = new Node(); // new tail of list
+	temp = head;
+	while (temp->next != nullptr) {
+		pre = temp;
+		temp = temp->next;
+	}
+	pre->next = nullptr;
+	delete temp;
+}
+void LinkedList::delete_from_particular_position(int pos) {
+	// length calculate
+	int length = 0;
+	Node* temp = new Node();
+	temp = head;
+	while (temp->next != nullptr) {
+		temp = temp->next;
+		length++;
+	}
+	if (pos > length) {
+		cout << "This position doesnt exist in a list.\n";
+		return;
+	}
+	else {
+		temp = head;
+		Node* pre = new Node();
+		Node* cur = new Node();
+		for (int i = 1; i < pos; i++)
+		{
+			pre = temp;
+			temp = temp->next;
+			cur = temp->next;
+		}
+		pre->next = cur;
+		delete temp;
 	}
 }
