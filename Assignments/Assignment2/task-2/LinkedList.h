@@ -12,7 +12,6 @@ public:
 	T deleteFromTail();
 	static LinkedList reverseList(LinkedList&);
 	static bool palindrome(LinkedList&);
-	static void removeLessThanPrev(LinkedList&);
 	void display();
 };
 template <class T>
@@ -95,32 +94,6 @@ template <class T>
 		temp2 = temp2->next;
 	}
 	return true;
-}
-template <class T>
-void LinkedList<T>::removeLessThanPrev(LinkedList<T>& l1) {
-	Node<T>* temp = l1.head;
-	Node<T>* previous = l1.head;
-	Node<T>* nodeToBeDeleted = nullptr;
-	while (temp != nullptr) {
-		temp = temp->next;
-		if (temp->data < previous->data) {
-			if (temp->next == nullptr) {
-				nodeToBeDeleted = temp;
-				previous->next = nullptr;
-				delete nodeToBeDeleted;
-				break;
-			}
-			else {
-				previous->next = temp->next;
-				nodeToBeDeleted = temp;
-				temp = temp->next;
-				delete nodeToBeDeleted;
-			}
-		}
-		else {
-			previous = temp;
-		}
-	}
 }
 template <class T>
 void LinkedList<T>::display() {
